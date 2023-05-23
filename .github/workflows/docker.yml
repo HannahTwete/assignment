@@ -26,9 +26,9 @@ jobs:
      
       - name: Build application
         run: |
-          SET CGO_ENABLED=0
+          SET CGO_ENABLED=1
           SET GOOS=windows
-          SET GOARCH=arm64
+          SET GOARCH=amd64
           go build -o endpoint -o build/endpoint main.go
      
       - name: Build Docker image
