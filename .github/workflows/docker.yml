@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -28,7 +28,7 @@ jobs:
 
       - name: Build
         run: |
-          CGO_ENABLED=0 GOOS=<os> GOARCH=<arch> go build -o endpoint -o build/endpoint main.go
+          go build -o endpoint.exe -o build/endpoint.exe main.go
 
       - name: Docker build
         run: |
@@ -44,7 +44,7 @@ jobs:
 
       - name: Execute built application
         run: |
-          ./endpoint
+          .\endpoint.exe
 
       - name: Run Docker container
         run: |
