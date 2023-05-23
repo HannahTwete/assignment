@@ -1,0 +1,51 @@
+name: Go_package_test_build_run
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - 'dev*'
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20.4'
+
+      - name: Update dependencies
+        run: go get -u github.com/google/go-cmp
+
+      - name: Test
+        run: go test ./...
+
+      - name: Build
+        run: |
+          CGO_ENABLED=0 GOOS=<os> GOARCH=<arch> go build -o endpoint -o build/endpoint main.go
+
+      - name: Docker build
+        run: |
+          docker build -t endpoint:<1.0.0> .
+
+      - name: Run Go package
+        run: |
+          go run main.go
+
+      - name: Change directory to build
+        run: |
+          cd build
+
+      - name: Execute built application
+        run: |
+          ./endpoint
+
+      - name: Run Docker container
+        run: |
+          docker run -d -p 8080:8080 --name endpoint endpoint:<1.0.0>
