@@ -28,7 +28,7 @@ jobs:
 
       - name: Build
         run: |
-          CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o endpoint -o build/endpoint main.go
+          go build -o endpoint.exe -o build/endpoint.exe main.go
 
       - name: Docker build
         run: |
