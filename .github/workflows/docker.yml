@@ -26,7 +26,7 @@ jobs:
      
       - name: Build application
         run: |
-          SET CGO_ENABLED=1
+          SET CGO_ENABLED=0
           SET GOOS=windows
           SET GOARCH=amd64
           go build -o endpoint -o build/endpoint main.go
