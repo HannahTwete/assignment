@@ -62,44 +62,6 @@ func TestNew(t *testing.T) {
 	}
 }
 
-*/func TestServer_Start(t *testing.T) {
-	var tests = []struct {
-		name string
-		want []string
-	}{
-		{
-			name: "start",
-			want: []string{
-				"Server started, listening on localhost:8080.\n",
-				"Server stopped, reason: interrupt.\n",
-			},
-		},
-	}
-
-	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
-			testLogs = []string{}
-			srv := server{
-				httpServer: &http.Server{
-					Addr: "localhost:8080",
-				},
-				router: http.NewServeMux(),
-				log:    mockLogger{},
-			}
-			go func() {
-				time.Sleep(time.Millisecond * 100)
-				syscall.Kill(syscall.Getpid(), syscall.SIGINT)
-			}()
-			srv.Start()
-
-			if diff := cmp.Diff(test.want, testLogs); diff != "" {
-				t.Errorf("Start() = unexpected result (-want +got):\n%s\n", diff)
-			}
-			testLogs = []string{}
-		})
-	}
-}*/
-
 var testLogs = []string{}
 
 type mockLogger struct{}
