@@ -32,7 +32,7 @@ jobs:
 
       - name: Docker build
         run: |
-          docker build -t endpoint:<1.0.0> .
+          docker build -t endpoint:1.0.0 .
 
       - name: Run Go package
         run: |
@@ -48,4 +48,4 @@ jobs:
 
       - name: Run Docker container
         run: |
-          docker run -d -p 8080:8080 --name endpoint endpoint:<1.0.0>
+          docker run -d -p 8080:8080 --name endpoint endpoint:1.0.0
