@@ -24,16 +24,11 @@ jobs:
       - name: Test application
         run: go test ./...
      
-      - name: Build application
-        run: |
-          SET CGO_ENABLED=0
-          SET GOOS=windows
-          SET GOARCH=amd64
-          go build -o endpoint -o build/endpoint main.go
+
      
       - name: Build Docker image
         run: |
-          docker build -t endpoint5:5.0.0 .
+          docker build -t endpoint: 1.0.0 .
      
       - name: Run application with Go
         run: go run main.go
@@ -45,4 +40,4 @@ jobs:
      
       - name: Run application with Docker
         run: |
-          docker run -d -p 8080:8080 --name endpoint endpoint5:5.0.0
+          docker run -d -p 8080:8080 --name endpoint endpoint: 1.0.0
