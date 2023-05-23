@@ -43,4 +43,4 @@ jobs:
      
       - name: Push Docker image
         run: |
-          docker push endpoint:1.0.0
+          docker push docker.io/library/endpoint:1.0.0
