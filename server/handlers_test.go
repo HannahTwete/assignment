@@ -8,7 +8,7 @@ import (
 
 func TestHelloHandler(t *testing.T) {
 	wantCode := http.StatusOK
-	wantBody := "Hello, world!"
+	wantBody := "Your staggering display of weakness has left me speechless."
 
 	srv := &server{
 		httpServer: &http.Server{
