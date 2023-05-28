@@ -65,3 +65,21 @@ jobs:
         env:
           COSIGN_EXPERIMENTAL: "true"
         run: echo "${{ steps.meta.outputs.tags }}" | xargs -I {} cosign sign {}@${{ steps.build-and-push.outputs.digest }}
+        
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.20.4'
+     
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Test application
+        run: go test ./...
+     
+      - name: Build application
+        run: |
+          CGO_ENABLED=0
+          GOOS=linux
+          GOARCH=amd64
+          go build -o endpoint -o build/endpoint main.go
